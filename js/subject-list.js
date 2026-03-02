@@ -234,15 +234,24 @@ function renderConcepts(sub){
   const list = document.getElementById("conceptList");
   const title = document.getElementById("subjectTitle");
 
+  // 🔥 Save current subject
+  localStorage.setItem("activeSubject", sub);
+
   title.innerText = `📘 ${sub} Concepts`;
   list.innerHTML = "";
+  // 🔥 Apply Subject Theme
+document.body.setAttribute("data-subject", sub);
 
   const data = subjectData[sub] || [];
-  // 🔥 Load saved progress
-// 🔥 Load tab-wise progress
-const tabData =
-  JSON.parse(localStorage.getItem("tabProgress")) || {};
-  
+
+  // 🔥 Load tab-wise progress
+  const tabData =
+    JSON.parse(localStorage.getItem("tabProgress")) || {};
+
+  // 🔥 Load saved open group (subject wise)
+  const savedGroup =
+    localStorage.getItem("openGroup_" + sub);
+
   data.forEach((group,index)=>{
 
     // 🔹 GROUP CARD
@@ -262,29 +271,35 @@ const tabData =
 
     group.items.forEach(c=>{
       
-      // 🔥 Calculate final progress (tab average)
-let finalProgress = c.progress;
+      // 🔥 Calculate final progress
+      let finalProgress = c.progress;
 
-if(tabData[c.page]){
+      if(tabData[c.page]){
 
-  const tabs =
-    Object.values(tabData[c.page]);
+        const tabs =
+          Object.values(tabData[c.page]);
 
-  if(tabs.length > 0){
+        if(tabs.length > 0){
 
-    const total =
-      tabs.reduce((a,b)=>a+b,0);
+          const total =
+            tabs.reduce((a,b)=>a+b,0);
 
-    finalProgress =
-      Math.round(total / tabs.length);
-  }
-}
+          finalProgress =
+            Math.round(total / tabs.length);
+        }
+      }
 
       const div = document.createElement("div");
-      div.className = "card";
+div.className = "card";
+
+const lastOpened = localStorage.getItem("lastOpened");
+
+if(lastOpened === c.page){
+  div.classList.add("last-active");
+}
 
       div.onclick = e=>{
-        e.stopPropagation(); // prevent group toggle
+        e.stopPropagation();
 
         rippleEffect(e,div);
 
@@ -293,9 +308,12 @@ if(tabData[c.page]){
           return;
         }
 
-        setTimeout(()=>{
-          location.href = "./" + c.page;
-        },200);
+        // 🔥 Save last opened page
+localStorage.setItem("lastOpened", c.page);
+
+setTimeout(()=>{
+  location.href = c.page;
+},200);
       };
 
       div.innerHTML = `
@@ -308,10 +326,10 @@ if(tabData[c.page]){
           ${c.title}
         </div>
 
-<div class="progress"
-     style="--value:${finalProgress}%">
-  ${finalProgress}%
-</div>
+        <div class="progress"
+             style="--value:${finalProgress}%">
+          ${finalProgress}%
+        </div>
       `;
 
       childContainer.appendChild(div);
@@ -320,41 +338,63 @@ if(tabData[c.page]){
     // 🔹 TOGGLE LOGIC
     groupDiv.onclick = ()=>{
 
-  const allContainers =
-    document.querySelectorAll(".child-container");
+      const allContainers =
+        document.querySelectorAll(".child-container");
 
-  const allArrows =
-    document.querySelectorAll(".group-arrow");
+      const allArrows =
+        document.querySelectorAll(".group-arrow");
 
-  allContainers.forEach(c=>{
-    if(c !== childContainer){
-      c.style.height = "0px";
-    }
-  });
+      allContainers.forEach(c=>{
+        if(c !== childContainer){
+          c.style.height = "0px";
+        }
+      });
 
-  allArrows.forEach(a=>{
-    a.classList.remove("rotate");
-  });
+      allArrows.forEach(a=>{
+        a.classList.remove("rotate");
+      });
 
-  if(childContainer.style.height &&
-     childContainer.style.height !== "0px"){
+      if(childContainer.style.height &&
+         childContainer.style.height !== "0px"){
 
-    childContainer.style.height = "0px";
+        childContainer.style.height = "0px";
 
-  }else{
+        // 🔥 Remove saved group
+        localStorage.removeItem("openGroup_" + sub);
 
-    childContainer.style.height =
-      childContainer.scrollHeight + "px";
+      }else{
 
-    document.getElementById(
-      `arrow-${index}`
-    ).classList.add("rotate");
-  }
+        childContainer.style.height =
+          childContainer.scrollHeight + "px";
 
-};
+        document
+          .getElementById(`arrow-${index}`)
+          .classList.add("rotate");
+
+        // 🔥 Save open group
+        localStorage.setItem(
+          "openGroup_" + sub,
+          index
+        );
+      }
+
+    };
 
     list.appendChild(groupDiv);
     list.appendChild(childContainer);
+
+    // 🔥 AUTO OPEN SAVED GROUP
+    if(savedGroup == index){
+
+      setTimeout(()=>{
+        childContainer.style.height =
+          childContainer.scrollHeight + "px";
+
+        document
+          .getElementById(`arrow-${index}`)
+          .classList.add("rotate");
+      },50);
+    }
 
   });
 }
@@ -402,4 +442,17 @@ function rippleEffect(e,el){
 DEFAULT LOAD
 ====================== */
 
-renderConcepts("CDP");
+const saved =
+  localStorage.getItem("activeSubject") || "CDP";
+
+renderConcepts(saved);
+
+/* 🔥 Active tab auto set */
+document.querySelectorAll(".tab")
+.forEach(tab=>{
+  if(tab.textContent.trim() === saved){
+    tab.classList.add("active");
+  } else {
+    tab.classList.remove("active");
+  }
+});
