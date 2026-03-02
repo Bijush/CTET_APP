@@ -5,7 +5,8 @@ PAGE
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#f5f7fb;
+  background:var(--light);
+transition:.3s;
 }
 
 
@@ -115,8 +116,9 @@ TABS
 }
 
 .tab.active{
-  background:#1e88e5;
+  background:var(--theme);
   color:#fff;
+  box-shadow:0 6px 16px rgba(0,0,0,.15);
 }
 
 
@@ -267,6 +269,7 @@ RIPPLE EFFECT
   justify-content:space-between;
   align-items:center;
   font-weight:bold;
+  border-left:4px solid var(--theme);
 }
 
 .group-arrow{
@@ -282,4 +285,43 @@ RIPPLE EFFECT
   overflow:hidden;
   transition:height .4s ease;
 }
+/* ======================
+SUBJECT THEMES
+====================== */
 
+/* CDP */
+body[data-subject="CDP"]{
+  --theme:#1e88e5;
+  --light:#e3f2fd;
+}
+
+/* MATH */
+body[data-subject="MATH"]{
+  --theme:#43a047;
+  --light:#e8f5e9;
+}
+
+/* EVS */
+body[data-subject="EVS"]{
+  --theme:#00acc1;
+  --light:#e0f7fa;
+}
+
+/* ENGLISH */
+body[data-subject="ENGLISH"]{
+  --theme:#8e24aa;
+  --light:#f3e5f5;
+}
+
+/* BENGALI */
+body[data-subject="BENGALI"]{
+  --theme:#e53935;
+  --light:#ffebee;
+}
+
+/* 🔥 Last Opened Card Highlight */
+.card.last-active{
+  border:2px solid var(--theme);
+  box-shadow:0 0 20px rgba(0,0,0,.15);
+  transform:scale(1.02);
+}
