@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>EVS – Gender & Inclusion</title>
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet"
+      href="../../css/theory.css">
+
+</head>
+
+<body>
+
+<!-- ======================
+HEADER
+====================== -->
+
+<div class="theory-head">
+
+  <button class="back-btn"
+          onclick="goBack()">
+    ⬅
+  </button>
+
+  <h2>👩‍🎓 Gender & Inclusion Stories</h2>
+
+</div>
+
+<!-- ======================
+PAGE CONTENT
+====================== -->
+
+<div id="theoryBox"
+     class="tab-page fade-in"
+     data-tab="wahida">
+</div>
+
+<!-- ======================
+BOTTOM NAV GLASS TABS
+====================== -->
+
+<div class="bottom-tabs">
+
+  <button class="btab active"
+          onclick="openTab('wahida', event)">
+    <span>👩</span>
+    <label>Wahida</label>
+  </button>
+
+  <button class="btab"
+          onclick="openTab('amrita', event)">
+    <span>🌳</span>
+    <label>Amrita</label>
+  </button>
+
+  <button class="btab"
+          onclick="openTab('chipko', event)">
+    <span>🌲</span>
+    <label>Chipko</label>
+  </button>
+
+  <button class="btab"
+          onclick="openTab('inclusion', event)">
+    <span>🤝</span>
+    <label>Inclusion</label>
+  </button>
+
+  <button class="btab"
+          onclick="goEvsMcq(event)">
+    <span>📝</span>
+    <label>EVS MCQ</label>
+  </button>
+
+</div>
+
+<!-- ======================
+SCRIPT
+====================== -->
+
+<script type="module"
+        src="../../js/EVS/evs-gender.js">
+</script>
+
+<script defer
+        src="../../js/progress-tracker.js">
+</script>
+
+<script>
+/* ======================
+GO BACK
+====================== */
+function goBack(){
+  if(document.referrer){
+    history.back();
+  }else{
+    window.location.replace("../subject-list.html");
+  }
+}
+</script>
+
+</body>
+</html>
