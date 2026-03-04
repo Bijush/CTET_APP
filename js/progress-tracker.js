@@ -2,6 +2,10 @@
 UNIVERSAL PROGRESS TRACKER
 ====================== */
 
+/* ======================
+UNIVERSAL PROGRESS TRACKER
+====================== */
+
 (function(){
 
   function saveProgress(percent){
@@ -11,15 +15,24 @@ UNIVERSAL PROGRESS TRACKER
 
     let data =
       JSON.parse(
-        localStorage.getItem("progressData")
+        localStorage.getItem("tabProgress")
       ) || {};
 
-    data[page] = percent;
+    if(!data[page]) data[page] = {};
 
-    localStorage.setItem(
-      "progressData",
-      JSON.stringify(data)
-    );
+    const old =
+      data[page].scroll || 0;
+
+    if(percent > old){
+
+      data[page].scroll = percent;
+
+      localStorage.setItem(
+        "tabProgress",
+        JSON.stringify(data)
+      );
+    }
+
   }
 
   function updateProgress(){
@@ -36,6 +49,8 @@ UNIVERSAL PROGRESS TRACKER
     const total =
       docHeight - windowHeight;
 
+    if(total <= 0) return;
+
     const percent =
       Math.min(
         100,
@@ -45,6 +60,7 @@ UNIVERSAL PROGRESS TRACKER
       );
 
     saveProgress(percent);
+
   }
 
   window.addEventListener(
