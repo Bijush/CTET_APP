@@ -295,7 +295,16 @@ div.className = "card";
 const lastOpened = localStorage.getItem("lastOpened");
 
 if(lastOpened === c.page){
+
   div.classList.add("last-active");
+
+  setTimeout(()=>{
+    div.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+  },300);
+
 }
 
       div.onclick = e=>{
@@ -455,4 +464,25 @@ document.querySelectorAll(".tab")
   } else {
     tab.classList.remove("active");
   }
+});
+
+
+/* 🔥 Fix Back Button Highlight + Auto Scroll */
+
+window.addEventListener("pageshow", ()=>{
+
+  const saved =
+    localStorage.getItem("activeSubject") || "CDP";
+
+  renderConcepts(saved);
+
+  document.querySelectorAll(".tab")
+  .forEach(tab=>{
+    if(tab.textContent.trim() === saved){
+      tab.classList.add("active");
+    } else {
+      tab.classList.remove("active");
+    }
+  });
+
 });
