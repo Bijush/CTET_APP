@@ -168,15 +168,15 @@ EVS:[
   {
     group:"EVS Pedagogy",
     items:[
-      { title:"Nature & Scope of EVS", page:"evs-nature.html", progress:0, lock:false },
-      { title:"Aims & Objectives", page:"evs-aims.html", progress:0, lock:false },
-      { title:"Integrated Approach", page:"evs-integrated.html", progress:0, lock:false },
-      { title:"Constructivism in EVS", page:"evs-constructivism.html", progress:0, lock:false },
-      { title:"Teaching Methods", page:"evs-methods.html", progress:0, lock:false },
-      { title:"Assessment in EVS", page:"evs-assessment.html", progress:0, lock:false },
-      { title:"TLM & Activity Based Learning", page:"evs-tlm.html", progress:0, lock:false },
-      { title:"Learning Difficulties in EVS", page:"evs-difficulties.html", progress:0, lock:false },
-      { title:"Environmental Sensitivity", page:"evs-sensitivity.html", progress:0, lock:false }
+      { title:"Nature & Scope of EVS", page:"EVS/PEDAGOGY/evs-nature.html", progress:0, lock:false },
+      { title:"Aims & Objectives", page:"EVS/PEDAGOGY/evs-aims.html", progress:0, lock:false },
+      { title:"Integrated Approach", page:"EVS/PEDAGOGY/evs-integrated.html", progress:0, lock:false },
+      { title:"Constructivism in EVS", page:"EVS/PEDAGOGY/evs-constructivism.html", progress:0, lock:false },
+      { title:"Teaching Methods", page:"EVS/PEDAGOGY/evs-methods.html", progress:0, lock:false },
+      { title:"Assessment in EVS", page:"EVS/PEDAGOGY/evs-assessment.html", progress:0, lock:false },
+      { title:"TLM & Activity Based Learning", page:"EVS/PEDAGOGY/evs-tlm.html", progress:0, lock:false },
+      { title:"Learning Difficulties in EVS", page:"EVS/PEDAGOGY/evs-difficulties.html", progress:0, lock:false },
+      { title:"Environmental Sensitivity", page:"EVS/PEDAGOGY/evs-sensitivity.html", progress:0, lock:false }
     ]
   }
 
