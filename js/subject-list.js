@@ -274,20 +274,24 @@ document.body.setAttribute("data-subject", sub);
       // 🔥 Calculate final progress
       let finalProgress = c.progress;
 
-      if(tabData[c.page]){
+      const key =
+c.page.split("/").pop();
 
-        const tabs =
-          Object.values(tabData[c.page]);
+if(tabData[key]){
 
-        if(tabs.length > 0){
+  const tabs =
+    Object.values(tabData[key]);
 
-          const total =
-            tabs.reduce((a,b)=>a+b,0);
+  if(tabs.length > 0){
 
-          finalProgress =
-            Math.round(total / tabs.length);
-        }
-      }
+    const total =
+      tabs.reduce((a,b)=>a+b,0);
+
+    finalProgress =
+      Math.round(total / tabs.length);
+  }
+
+}
 
       const div = document.createElement("div");
 div.className = "card";
