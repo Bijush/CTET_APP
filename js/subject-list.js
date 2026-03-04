@@ -274,21 +274,17 @@ document.body.setAttribute("data-subject", sub);
       // 🔥 Calculate final progress
       let finalProgress = c.progress;
 
-      const key =
-c.page.split("/").pop();
+      const key = c.page.split("/").pop();
 
-if(tabData[key]){
+if(tabData && tabData[key]){
 
-  const tabs =
-    Object.values(tabData[key]);
+  const tabs = Object.values(tabData[key]);
 
-  if(tabs.length > 0){
+  if(Array.isArray(tabs) && tabs.length){
 
-    const total =
-      tabs.reduce((a,b)=>a+b,0);
+    const total = tabs.reduce((a,b)=>a + Number(b || 0),0);
 
-    finalProgress =
-      Math.round(total / tabs.length);
+    finalProgress = Math.round(total / tabs.length);
   }
 
 }
