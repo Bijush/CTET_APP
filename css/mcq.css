@@ -930,3 +930,298 @@ background:#fef2f2;
 background:#ef4444;
 color:#fff;
 }
+/* ======================
+AI PANEL PRO (COMPACT)
+====================== */
+
+.ai-panel{
+margin-top:16px;
+border-radius:16px;
+background:linear-gradient(180deg,#ffffff,#f8f9ff);
+border:1px solid #e5e7eb;
+box-shadow:0 10px 24px rgba(0,0,0,0.07);
+overflow:hidden;
+}
+
+/* HEADER */
+
+.ai-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:12px 14px;
+
+background:linear-gradient(135deg,#6366f1,#9333ea);
+
+color:white;
+
+font-weight:600;
+font-size:14px;
+
+cursor:pointer;
+transition:.25s;
+}
+
+.ai-header:hover{
+filter:brightness(1.05);
+}
+
+.ai-toggle-icon{
+font-size:13px;
+transition:transform .3s ease;
+}
+
+/* CONTENT */
+
+.ai-content{
+padding:12px;
+animation:fadeIn .25s ease;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(-4px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/* ======================
+AI CARDS
+====================== */
+
+.ai-card{
+background:white;
+border-radius:12px;
+padding:12px;
+margin-bottom:10px;
+border:1px solid #eef0f6;
+transition:.25s;
+}
+
+.ai-card:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 14px rgba(0,0,0,0.06);
+}
+
+/* CARD TITLE */
+
+.ai-card-title{
+font-weight:600;
+font-size:13px;
+margin-bottom:6px;
+color:#4f46e5;
+display:flex;
+align-items:center;
+gap:4px;
+}
+
+/* TEXT */
+
+.ai-card-body{
+font-size:13px;
+line-height:1.5;
+color:#374151;
+}
+
+/* ======================
+OPTION ANALYSIS
+====================== */
+
+.ai-options{
+margin-top:6px;
+}
+
+.ai-option{
+background:#f9fafb;
+border-radius:10px;
+padding:8px;
+margin-bottom:6px;
+border:1px solid #e5e7eb;
+transition:.2s;
+}
+
+.ai-option:hover{
+background:#f3f4f6;
+}
+
+.ai-option.correct{
+border-left:4px solid #22c55e;
+}
+
+.ai-option.wrong{
+border-left:4px solid #ef4444;
+}
+
+.ai-option-title{
+font-weight:600;
+font-size:12px;
+margin-bottom:3px;
+color:#111827;
+}
+
+.ai-option-text{
+font-size:12px;
+line-height:1.45;
+color:#374151;
+}
+
+.ai-tag{
+font-size:11px;
+margin-left:5px;
+color:#6b7280;
+}
+
+/* ======================
+PEDAGOGY GRID
+====================== */
+
+.ai-pedagogy{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+}
+
+.ped-card{
+background:#f8fafc;
+border-radius:10px;
+padding:8px;
+border:1px solid #e5e7eb;
+cursor:pointer;
+transition:.2s;
+display:flex;
+flex-direction:column;
+font-size:12px;
+}
+
+.ped-card:hover{
+background:#eef2ff;
+transform:translateY(-1px);
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+
+.ped-card span{
+margin-top:4px;
+font-weight:600;
+color:#6366f1;
+font-size:12px;
+}
+
+/* ======================
+WARNING
+====================== */
+
+.ai-warning{
+background:#fff3cd;
+border:1px solid #ffe69c;
+padding:8px;
+border-radius:10px;
+font-size:12px;
+color:#92400e;
+}
+
+/* ======================
+TRAP / BOOST
+====================== */
+
+.trap-red{
+color:#dc2626;
+font-weight:600;
+}
+
+.boost-green{
+color:#16a34a;
+font-weight:600;
+}
+
+/* ======================
+CORRECT OPTION ANIMATION
+====================== */
+
+.ai-option.correct{
+border-left:4px solid #22c55e;
+background:#ecfdf5;
+animation:correctPulse .6s ease;
+}
+
+@keyframes correctPulse{
+
+0%{
+transform:scale(.96);
+box-shadow:0 0 0 rgba(34,197,94,0);
+}
+
+50%{
+transform:scale(1.02);
+box-shadow:0 0 12px rgba(34,197,94,.35);
+}
+
+100%{
+transform:scale(1);
+box-shadow:0 0 0 rgba(34,197,94,0);
+}
+
+}
+/* ======================
+WRONG OPTION ANIMATION
+====================== */
+
+.ai-option.wrong{
+border-left:4px solid #ef4444;
+background:#fef2f2;
+animation:wrongShake .5s ease;
+}
+
+@keyframes wrongShake{
+
+0%{ transform:translateX(0); }
+
+25%{ transform:translateX(-3px); }
+
+50%{ transform:translateX(3px); }
+
+75%{ transform:translateX(-2px); }
+
+100%{ transform:translateX(0); }
+
+}
+/* ======================
+OPTION REVEAL
+====================== */
+
+.ai-option{
+animation:optionFade .35s ease;
+}
+
+@keyframes optionFade{
+
+from{
+opacity:0;
+transform:translateY(6px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+.ai-tag{
+font-size:11px;
+margin-left:6px;
+color:#6b7280;
+}
+
+.ai-option.correct .ai-tag{
+color:#16a34a;
+font-weight:600;
+}
+
+.ai-option.wrong .ai-tag{
+color:#dc2626;
+font-weight:600;
+}
