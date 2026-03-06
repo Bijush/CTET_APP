@@ -21,7 +21,7 @@ export const examTraps = {
     "memorization",
     "memorise",
     "drill",
-"Strict","control","Strict control","Blind","rules","examination","High-stakes",
+    "Strict","control","Strict control","Blind","rules","examination","High-stakes",
     "passive",
     "lecture method",
     "teacher-centred",
@@ -36,7 +36,6 @@ export const examTraps = {
     "exam focused",
     "repetition",
 
-    // 🆕 Added Traps
     "one way teaching",
     "dictation method",
     "copy from board",
@@ -53,7 +52,6 @@ export const examTraps = {
     "teacher dominance",
     "mechanical learning",
 
-    // 🆕 Extra Added
     "teacher monopoly",
     "no flexibility",
     "content memorization",
@@ -61,27 +59,65 @@ export const examTraps = {
     "test drilling",
     "performance pressure",
 
+    /* 🆕 2024 Story Based Trap */
+    "only factual knowledge",
+    "only information",
+    "technical details only",
+    "defence training",
+    "construction planning",
+    "tourism promotion",
+    "memorising river names",
+    "map memorization",
+    "train route learning",
+    "discipline only",
+    "career information only",
+    /* 🆕 Advanced CTET Trap Signals */
+"teacher explanation only",
+"lecture and notes",
+"students listen silently",
+"no activity",
+"no group activity",
+"memorize definition",
+"finish syllabus quickly",
+"test preparation",
+"coaching style teaching",
+"exam drilling",
+"content coverage only",
+"teacher gives answers",
+"students repeat answers",
+"discipline through fear",
+"students cannot question",
+"classroom silence enforced",
+"punishment for mistakes",
+
+// Bengali
+"শিক্ষক বলবে শিক্ষার্থী শুনবে",
+"শুধু লেকচার পদ্ধতি",
+"কোন কার্যক্রম নেই",
+"শুধু সিলেবাস শেষ করা",
+"পরীক্ষার প্রস্তুতি মাত্র",
+"ভুল করলে শাস্তি",
+"শিক্ষার্থী প্রশ্ন করতে পারবে না",
     // Bengali
     "পুনরাবৃত্তি",
     "সবসময়","কখনোই না","শুধু","অবশ্যই","সম্পূর্ণ",
     "মুখস্থ","শাস্তি","নিষ্ক্রিয়",
     "শিক্ষক-কেন্দ্রিক","পরীক্ষাভিত্তিক",
-
-    // 🆕 Bengali Added
     "শুধু লেকচার",
     "বোর্ড থেকে কপি",
     "ভয়ভিত্তিক শিক্ষা",
     "কঠোর শাসন",
     "প্রশ্ন নিষিদ্ধ",
     "একই পদ্ধতি",
-
-    // 🆕 Extra Bengali
     "শিক্ষকের একাধিপত্য",
     "নমনীয়তা নেই",
     "বিষয়বস্তু মুখস্থ",
     "শুধু সিলেবাস শেষ",
     "টেস্ট অনুশীলন চাপ",
-    "পারফরম্যান্স চাপ"
+    "পারফরম্যান্স চাপ",
+    "শুধু তথ্য",
+    "শুধু তথ্যভিত্তিক",
+    "প্রযুক্তিগত তথ্য মাত্র"
   ],
 
   /* ======================
@@ -101,7 +137,6 @@ export const examTraps = {
     "linear development",
     "same for all children",
 
-    // 🆕 Added
     "hereditary intelligence only",
     "no environmental role",
     "development stops",
@@ -109,29 +144,74 @@ export const examTraps = {
     "labeling children",
     "slow learner stigma",
 
-    // 🆕 Extra
     "intelligence cannot improve",
     "ability fixed at birth",
     "learning depends only on iq",
     "ignore emotional development",
 
+    /* 🆕 2024 Inclusion Trap */
+    "exclude",
+    "segregate",
+    "separate section",
+    "special class only",
+    "ignore diversity",
+    /* 🆕 Advanced CDP Traps */
+"child intelligence fixed",
+"learning ability fixed",
+"weak students cannot improve",
+"gifted students born only",
+"environment does not matter",
+"learning depends only on memory",
+"emotional needs ignored",
+"punishment improves learning",
+
+// Bengali
+"দুর্বল ছাত্র উন্নতি করতে পারে না",
+"বুদ্ধিমত্তা জন্মগত স্থির",
+"পরিবেশের প্রভাব নেই",
+"শুধু মুখস্থ করলে শেখা সম্ভব",
     // Bengali
     "স্থির বুদ্ধিমত্তা",
     "ভয়ভিত্তিক",
     "শাস্তিভিত্তিক",
     "একই পদ্ধতি",
     "নিষ্ক্রিয় শিক্ষার্থী",
-
-    // 🆕 Bengali Added
     "জন্মগত বুদ্ধি নির্ধারিত",
     "পরিবেশের ভূমিকা নেই",
     "শিশুকে লেবেল করা",
-
-    // 🆕 Extra Bengali
     "বুদ্ধি উন্নত হয় না",
     "জন্মগত সক্ষমতা স্থির",
     "আইকিউ নির্ভর শিক্ষা",
-    "আবেগীয় বিকাশ উপেক্ষা"
+    "আবেগীয় বিকাশ উপেক্ষা",
+    "পৃথক করে রাখা"
+  ],
+
+  /* ======================
+     🌿 EVS SPECIFIC TRAPS (🆕 Added)
+  ====================== */
+  EVS: [
+    "memorise water cycle",
+    "memorise definition",
+    "only scientific fact",
+    "only geography fact",
+    "only historical fact",
+    "ignore social context",
+    "no field visit",
+    "no observation",
+    "theoretical only",
+    "textbook only learning",
+    "no discussion",
+    "ignore local knowledge",
+    "only modern science",
+    "industrial growth only",
+
+    // Bengali
+    "জলচক্র মুখস্থ",
+    "সংজ্ঞা মুখস্থ",
+    "শুধু বৈজ্ঞানিক তথ্য",
+    "সামাজিক প্রেক্ষাপট উপেক্ষা",
+    "মাঠ পর্যবেক্ষণ নয়",
+    "স্থানীয় জ্ঞান উপেক্ষা"
   ],
 
   /* ======================
@@ -144,14 +224,10 @@ export const examTraps = {
     "no discussion",
     "memorization of words",
     "accuracy over fluency",
-
-    // 🆕 Added
     "translation method only",
     "teacher reading only",
     "no speaking practice",
     "no listening activity",
-
-    // 🆕 Extra
     "reading aloud only",
     "no communicative practice",
     "textbook translation",
@@ -162,12 +238,8 @@ export const examTraps = {
     "কোনো আলোচনা নয়",
     "শুধু মুখস্থ",
     "অর্থ না বুঝে",
-
-    // 🆕 Bengali Added
     "শুধু অনুবাদ",
     "কথা বলার অনুশীলন নেই",
-
-    // 🆕 Extra Bengali
     "শুধু জোরে পড়া",
     "যোগাযোগ অনুশীলন নেই",
     "পাঠ্যবই অনুবাদ",

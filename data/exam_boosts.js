@@ -38,7 +38,29 @@ export const examBoosts = {
     "exploration",
     "discovery learning",
     "experimentation",
+/* 🆕 Advanced Positive Pedagogy Signals */
 
+"student engagement",
+"learning environment",
+"learning experience",
+"concept building",
+"student participation",
+"learning through activity",
+"guided discovery",
+"inquiry learning",
+"student reflection",
+"collaborative problem solving",
+"discussion based learning",
+"child exploration",
+"learning autonomy",
+
+// Bengali
+"শিক্ষার্থীর অংশগ্রহণ",
+"ধারণা গঠন",
+"কার্যকলাপের মাধ্যমে শেখা",
+"অনুসন্ধানমূলক শিক্ষা",
+"আলোচনাভিত্তিক শিক্ষা",
+"শিক্ষার্থীর অনুসন্ধান",
     // Bengali
     "কার্যভিত্তিক",
     "শিশু-কেন্দ্রিক",
@@ -121,5 +143,18 @@ MATH: [
 "math lab",
 "activity based math",
 "concept building"
+],
+EVS:[
+"field visit",
+"nature observation",
+"local environment study",
+"community interaction",
+"environment awareness",
+"real life context",
+"learning from surroundings",
+
+"ক্ষেত্রসমীক্ষা",
+"প্রকৃতি পর্যবেক্ষণ",
+"স্থানীয় পরিবেশ অধ্যয়ন"
 ]
 };
