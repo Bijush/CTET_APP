@@ -31,6 +31,10 @@ const scertHistory =
   
   const vygotskyHistory =
   JSON.parse(localStorage.getItem("vygotsky_test_history")) || [];
+  
+  const kohlbargHistory =
+  JSON.parse(localStorage.getItem("kohlbarg_test_history")) || [];
+
 
 /* 🔥 Add type flag */
 const taggedMock = mockHistory.map(x => ({
@@ -58,8 +62,21 @@ const taggedVygotsky = vygotskyHistory.map(x => ({
   testType: "VYGOTSKY"
 }));
 
+const taggedKohlbarg =
+  kohlbargHistory.map(x => ({
+    ...x,
+    testType: "KOHLBARG"
+}));
+
 const history =
-  [...taggedMock, ...taggedMcq, ...taggedScert, ...taggedPiaget, ...taggedVygotsky]
+  [
+    ...taggedMock,
+    ...taggedMcq,
+    ...taggedScert,
+    ...taggedPiaget,
+    ...taggedVygotsky,
+    ...taggedKohlbarg   // 🔥 ADD THIS
+  ]
   .sort((a,b) =>
     new Date(b.date) - new Date(a.date)
   );
@@ -95,16 +112,18 @@ const history =
         <div>
 <div class="result-header">
   ${
-    result.testType === "MCQ"
+  result.testType === "MCQ"
     ? "🎉 MCQ Practice Completed"
     : result.testType === "SCERT"
       ? "🎓 SCERT Practice Completed"
       : result.testType === "PIAGET"
         ? "🧠 Piaget Practice Completed"
-            : result.testType === "VYGOTSKY"
-      ? "🎓 Vygotsky Practice Completed"
-        : "🎉 Mock Test Completed"
-  }
+        : result.testType === "VYGOTSKY"
+          ? "🎓 Vygotsky Practice Completed"
+          : result.testType === "KOHLBARG"   // 🔥 EI LINE ADD
+            ? "⚖️ Kohlbarg Practice Completed"
+            : "🎉 Mock Test Completed"
+}
 </div>
 
           <div class="result-subject">
@@ -324,39 +343,9 @@ window.toggleHistory = function(index){
 
 window.restartTest = function(){
 
-  /* 🔍 Detect last test type */
-  const lastResults = {
-    VYGOTSKY: JSON.parse(localStorage.getItem("last_vygotsky_result")),
-    PIAGET:   JSON.parse(localStorage.getItem("last_piaget_result")),
-    SCERT:    JSON.parse(localStorage.getItem("last_scert_result")),
-    MCQ:      JSON.parse(localStorage.getItem("last_mcq_result")),
-    MOCK:     JSON.parse(localStorage.getItem("last_mock_result"))
-  };
-
-  /* 🔥 Priority order (Top → Bottom) */
-  const pageMap = {
-    VYGOTSKY: "vygotsky-mcq.html",
-    PIAGET:   "piaget-mcq.html",
-    SCERT:    "scert.html",
-    MCQ:      "mcq.html",
-    MOCK:     "mock.html"
-  };
-
-  let page = "mock.html"; // default fallback
-
-  for (const type in lastResults) {
-    if (lastResults[type]) {
-      page = pageMap[type];
-      break; // stop at first match
-    }
-  }
-
-  /* 🔥 Clear last results */
-  Object.keys(lastResults).forEach(type => {
-    localStorage.removeItem(
-      "last_" + type.toLowerCase() + "_result"
-    );
-  });
+  /* 🔍 Detect last test page */
+  let page =
+    localStorage.getItem("last_test_page") || "mcq.html";
 
   /* 🔥 Clear resume / attempt data */
   Object.keys(localStorage).forEach(key => {
@@ -370,6 +359,9 @@ window.restartTest = function(){
     }
 
   });
+
+  /* clear session cache */
+  sessionStorage.clear();
 
   /* 🔄 Cache-safe restart */
   location.replace(
