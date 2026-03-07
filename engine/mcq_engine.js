@@ -3,6 +3,8 @@ import { offlineAIExplain } from "../utils/ai_explainer.js";
 import { getPedagogyProfile } from "../utils/pedagogy_ai.js";
 import { detectBoosts } from "../utils/boost_detector.js";
 
+
+
 export function startMCQ(config){
   
   /* ======================
@@ -513,40 +515,20 @@ if (progressInfo) {
   ====================== */
   let qText = "";
 
-  if (langMode === "BOTH") {
+if (langMode === "BOTH") {
 
-  qText = highlightBoosts(
-    highlightTraps(
-      nl2br(q.q_en),
-      q.subject
-    ),
-    q.subject
-  );
+  qText = nl2br(q.q_en);
 
   if (q.q_bn && q.q_bn.trim() !== "") {
-
     qText += `<div class="q-bn">
-${highlightBoosts(
-  highlightTraps(
-    nl2br(q.q_bn),
-    q.subject
-  ),
-  q.subject
-)}
+${nl2br(q.q_bn)}
 </div>`;
-
   }
 
 }
 else if (langMode === "EN") {
 
-  qText = highlightBoosts(
-    highlightTraps(
-      nl2br(q.q_en),
-      q.subject
-    ),
-    q.subject
-  );
+  qText = nl2br(q.q_en);
 
 }
 else if (langMode === "BN") {
@@ -556,13 +538,7 @@ else if (langMode === "BN") {
       ? q.q_bn
       : q.q_en;
 
-  qText = highlightBoosts(
-    highlightTraps(
-      nl2br(bnText),
-      q.subject
-    ),
-    q.subject
-  );
+  qText = nl2br(bnText);
 
 }
 
@@ -594,39 +570,27 @@ else if (langMode === "BN") {
 
     let optText = "";
 
-    if (langMode === "BOTH") {
+if (langMode === "BOTH") {
 
-  optText = highlightBoosts(
-    highlightTraps(
-      nl2br(en),
-      q.subject
-    ),
-    q.subject
-  );
+  optText = nl2br(en);
 
   if (bn && bn.trim() !== "") {
 
     optText += `<div class="option-bn">
-      ${highlightBoosts(
-        highlightTraps(
-          nl2br(bn),
-          q.subject
-        ),
-        q.subject
-      )}
+      ${nl2br(bn)}
     </div>`;
 
   }
 
 }
-    else if (langMode === "EN") {
-      optText = en;                 // ✅ ONLY EN
-    }
-    else if (langMode === "BN") {
-      optText = (bn && bn.trim() !== "") ? bn : en; // BN fallback
-    }
+else if (langMode === "EN") {
+  optText = en;                 // ✅ ONLY EN
+}
+else if (langMode === "BN") {
+  optText = (bn && bn.trim() !== "") ? bn : en; // BN fallback
+}
 
-    const labels = ["A", "B", "C", "D"];
+const labels = ["A", "B", "C", "D"];
 
 let engLabels = ["A", "B", "C", "D"];
 let bnLabels  = ["ক", "খ", "গ", "ঘ"];
@@ -638,13 +602,17 @@ btn.innerHTML = `
 langMode !== "BN"
 ? `<div class="opt-en">
 <span class="option-label">${engLabels[i]}.</span>
-${highlightBoosts(
-highlightTraps(
-nl2br(en),
-q.subject
-),
-q.subject
-)}
+${
+answered
+? highlightBoosts(
+    highlightTraps(
+      nl2br(en),
+      q.subject
+    ),
+    q.subject
+  )
+: nl2br(en)
+}
 </div>`
 : ""
 }
@@ -653,13 +621,17 @@ q.subject
   langMode !== "EN" && bn && bn.trim() !== ""
     ? `<div class="opt-bn">
          <span class="option-label">(${bnLabels[i]})</span>
-         ${highlightBoosts(
-            highlightTraps(
-              nl2br(bn),
-              q.subject
-            ),
-            q.subject
-         )}
+         ${
+answered
+? highlightBoosts(
+    highlightTraps(
+      nl2br(bn),
+      q.subject
+    ),
+    q.subject
+  )
+: nl2br(bn)
+}
        </div>`
     : ""
 }
@@ -1664,6 +1636,10 @@ localStorage.setItem(
   "last_test_page",
   location.pathname
 );
+localStorage.setItem(
+  "last_test_type",
+  resultKey || "MCQ"
+);
 
 
   /* 🔥 Save latest result */
@@ -1674,7 +1650,7 @@ resultKey,
 
   /* 🔥 Push to history */
   let history =
-    JSON.parse(localStorage.getItem("mcq_test_history")) || [];
+JSON.parse(localStorage.getItem(resultKey.replace("result","history"))) || [];
 
   history.unshift(resultData);
   if(history.length > 50){
@@ -1682,16 +1658,16 @@ history = history.slice(0,50);
 }
 
   localStorage.setItem(
-    "mcq_test_history",
-    JSON.stringify(history)
-  );
+  resultKey.replace("result","history"),
+  JSON.stringify(history)
+);
 
   /* 🔥 Clean resume keys */
   localStorage.removeItem(getIndexKey());
   localStorage.removeItem(getOrderKey());
   localStorage.removeItem(getAttemptKey());
 
-  window.location.href = "../../result.html";
+  window.location.href ="../../result.html";
 }
 
 
