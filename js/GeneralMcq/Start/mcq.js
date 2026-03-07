@@ -14,6 +14,7 @@ startMCQ({
 
   orderKey: "mcq_q_order",
 
-  attemptKey: "mcq_attempt_map"
+  attemptKey: "mcq_attempt_map",
+  resultKey: "mcq_test_result"
 
 });
