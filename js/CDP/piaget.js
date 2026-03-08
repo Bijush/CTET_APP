@@ -3644,72 +3644,51 @@ BACK BUTTON
 ====================== */
 
 window.goBack = function(){
-  window.location.replace("../subject-list.html");
+  const base = location.origin + "/CTET_APP/pages/";
+  window.location.href = base + "subject-list.html";
 };
 
 /* ======================
 PIAGET MCQ PAGE GO
 ====================== */
 
-/* ======================
-PIAGET MCQ PAGE GO
-====================== */
+window.goMCQ = function(topic, event){
 
-window.goPiagetMCQ = function(event){
-
-  // Active remove
-  document
-    .querySelectorAll(".btab")
-    .forEach(btn =>
-      btn.classList.remove("active")
-    );
-
-  // Active add
   if(event){
-    event.currentTarget
-         .classList.add("active");
+    document
+      .querySelectorAll(".btab")
+      .forEach(btn => btn.classList.remove("active"));
+
+    event.currentTarget.classList.add("active");
   }
 
-  // Ripple
-  const btn = event.currentTarget;
+  const btn = event?.currentTarget;
 
-  const circle =
-    document.createElement("span");
+  if(btn){
+    const circle = document.createElement("span");
+    circle.classList.add("ripple");
 
-  circle.classList.add("ripple");
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
 
-  const rect =
-    btn.getBoundingClientRect();
+    circle.style.width =
+    circle.style.height = size + "px";
 
-  const size =
-    Math.max(rect.width,
-             rect.height);
+    circle.style.left =
+      event.clientX - rect.left - size/2 + "px";
 
-  circle.style.width  =
-  circle.style.height =
-    size + "px";
+    circle.style.top =
+      event.clientY - rect.top - size/2 + "px";
 
-  circle.style.left =
-    event.clientX
-    - rect.left
-    - size/2 + "px";
+    btn.appendChild(circle);
 
-  circle.style.top =
-    event.clientY
-    - rect.top
-    - size/2 + "px";
-
-  btn.appendChild(circle);
+    setTimeout(()=>circle.remove(),600);
+  }
 
   setTimeout(()=>{
-    circle.remove();
-  },600);
-
-  // Redirect
-  setTimeout(()=>{
-    window.location.href =
-      "MCQ/piaget-mcq.html";
-  },180);
+  window.location.href =
+    `/CTET_APP/pages/MCQ_LOADER/mcq_engine.html?test=${topic}`;
+},150);
 
 };
 
