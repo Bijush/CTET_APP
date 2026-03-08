@@ -1634,7 +1634,9 @@ function saveResultAndGo(){
   /* 🔥 ADD THIS LINE */
 localStorage.setItem(
   "last_test_page",
-  location.pathname
+ // location.pathname
+ location.href
+ 
 );
 localStorage.setItem(
   "last_test_type",
@@ -1667,7 +1669,7 @@ history = history.slice(0,50);
   localStorage.removeItem(getOrderKey());
   localStorage.removeItem(getAttemptKey());
 
-  window.location.href ="../../result.html";
+  window.location.href ="../result.html";
 }
 
 
