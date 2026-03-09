@@ -1,10 +1,9 @@
 
-import { GK }
-from "./gk.js";
-import { currentAffairs }
-from "./current-affairs.js";
-import { reasoning }
-from "./reasoning.js";
+import { registerData } from "../../engine/bookmark_engine.js";
+import { GK } from "./gk.js";
+import { currentAffairs } from "./current-affairs.js";
+import { reasoning } from "./reasoning.js";
+
 export const TAptitude = [
   
   /* ================= TEACHING APTITUDE SET ================= */
@@ -504,7 +503,7 @@ export const TAptitude = [
 {
   id: "scert_mock_02",
   type: "MOCK",
-  subject: "Child Development",
+  subject: "CD",
   exam_session: "Previous Year Style",
   source: "SCERT Assam Pattern Analysis",
   is_exam_question: false,
@@ -588,7 +587,7 @@ export const TAptitude = [
 {
   id: "scert_mock_04",
   type: "MOCK",
-  subject: "General Knowledge (Assam)",
+  subject: "GK",
   exam_session: "Previous Year Style",
   source: "SCERT Assam Pattern Analysis",
   is_exam_question: false,
@@ -630,7 +629,7 @@ export const TAptitude = [
 {
   id: "scert_mock_05",
   type: "MOCK",
-  subject: "Child Development",
+  subject: "CD",
   exam_session: "Previous Year Style",
   source: "SCERT Assam Pattern Analysis",
   is_exam_question: false,
@@ -1175,10 +1174,11 @@ export const TAptitude = [
   exam: "SCERT Assam D.El.Ed",
   year: 2026
 },
-
 ...GK,
-    ...currentAffairs,
-              ...reasoning
+...reasoning,
+...currentAffairs
+
   
   
   ];
+  registerData("MOCK", TAptitude);
