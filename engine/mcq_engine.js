@@ -3,6 +3,12 @@ import { offlineAIExplain } from "../utils/ai_explainer.js";
 import { getPedagogyProfile } from "../utils/pedagogy_ai.js";
 import { detectBoosts } from "../utils/boost_detector.js";
 
+import {
+getBookmarks,
+toggleBookmark,
+isBookmarked,
+bookmarkSVG
+} from "../engine/bookmark_engine.js";
 
 
 export function startMCQ(config){
@@ -10,6 +16,7 @@ export function startMCQ(config){
   /* ======================
 ⚙️ FEATURE TOGGLES
 ====================== */
+
 
 const FEATURES = {
 
@@ -426,52 +433,12 @@ window.toggleLangView = () => {
 /* ======================
    ⭐ BOOKMARK SVG
 ====================== */
-function bookmarkSVG() {
-  return `
-    <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1z"/>
-    </svg>`;
-}
+
 
 /* ======================
    📦 BOOKMARK STORAGE
 ====================== */
-function getBookmarks() {
-  let b = JSON.parse(localStorage.getItem("bookmarks")) || [];
 
-  b = b.map(x => {
-
-    // Old string format fix
-    if (typeof x === "string") {
-      return {
-        type: "MCQ",
-        id: x,
-        subject: "General",
-        date: Date.now()
-      };
-    }
-
-    // Missing date fix
-    if (!x.date) {
-      x.date = Date.now();
-    }
-
-    // Missing subject fix
-    if (!x.subject) {
-      x.subject = "General";
-    }
-
-    return x;
-  });
-
-  localStorage.setItem("bookmarks", JSON.stringify(b));
-
-  return b;
-}
-
-function saveBookmarks(b) {
-  localStorage.setItem("bookmarks", JSON.stringify(b));
-}
 
 /* ======================
    🔔 SNACKBAR
@@ -651,8 +618,7 @@ if (progressInfo) {
 }
 
   /* ⭐ bookmark state */
- const isBookmarked = getBookmarks()
-  .some(b => b.id === q.id);
+ 
 
   /* ======================
      QUESTION TEXT (STRICT)
@@ -686,6 +652,9 @@ else if (langMode === "BN") {
 
 }
 
+const bookmarked = isBookmarked(q.id);
+
+
   qBox.innerHTML = `
   <div class="q-title-row">
 
@@ -694,14 +663,27 @@ else if (langMode === "BN") {
       <h3>${qText}</h3>
     </div>
 
-    <div class="bookmark ${isBookmarked ? "active" : ""}" id="bookmarkBtn">
+    <div class="bookmark ${bookmarked ? "active" : ""}" id="bookmarkBtn">
       ${bookmarkSVG()}
     </div>
 
   </div>
 `;
 
-  document.getElementById("bookmarkBtn").onclick = toggleBookmark;
+  document.getElementById("bookmarkBtn").onclick = () => {
+
+const saved = toggleBookmark(q);
+const btn = document.getElementById("bookmarkBtn");
+
+if(saved){
+btn.classList.add("active");
+showSnack("⭐ Bookmark saved");
+}else{
+btn.classList.remove("active");
+showSnack("❌ Bookmark removed");
+}
+
+};
 
   /* ======================
      OPTIONS (STRICT)
@@ -1547,82 +1529,7 @@ return highlighted;
 /* ======================
    ⭐ BOOKMARK TOGGLE
 ====================== */
-function toggleBookmark(){
 
-const currentQIndex = questionOrder[index];
-const q = filteredQuestions[currentQIndex];
-
-if(!q){
-console.warn("Bookmark: question not found");
-return;
-}
-
-let b = getBookmarks() || [];
-
-const pos = b.findIndex(
-x => x.id === q.id
-);
-
-const btn =
-document.getElementById("bookmarkBtn");
-
-if(!btn) return;
-
-
-/* ======================
-REMOVE BOOKMARK
-====================== */
-
-if(pos > -1){
-
-btn.classList.add("removing");
-
-setTimeout(()=>{
-
-b.splice(pos,1);
-
-saveBookmarks(b);
-
-btn.classList.remove(
-"active",
-"removing"
-);
-
-showSnack("❌ Bookmark removed");
-
-},300);
-
-}
-
-
-/* ======================
-ADD BOOKMARK
-====================== */
-
-else{
-
-/* duplicate protection */
-if(!b.some(x => x.id === q.id)){
-
-b.push({
-type:q.type || "MCQ",
-id:q.id,
-subject:q.subject || "General",
-date:Date.now()
-});
-
-}
-
-saveBookmarks(b);
-
-btn.classList.remove("removing");
-btn.classList.add("active");
-
-showSnack("⭐ Bookmark saved");
-
-}
-
-}
 
 window.toggleAIExplain = function(el){
 

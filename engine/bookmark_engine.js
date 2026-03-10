@@ -8,7 +8,6 @@ const registry = {
   CONCEPT: [],
   THEORY: [],
   GK: []
-  
 };
 
 /* ======================
@@ -56,4 +55,105 @@ export function getSubjects(){
 
   return [...subjects];
 
+}
+
+/* ======================
+   GET BOOKMARKS
+====================== */
+
+export function getBookmarks() {
+
+  let b =
+  JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+  b = b.map(x => {
+
+    if (typeof x === "string") {
+      return {
+        type: "MCQ",
+        id: x,
+        subject: "General",
+        date: Date.now()
+      };
+    }
+
+    if (!x.date) x.date = Date.now();
+    if (!x.subject) x.subject = "General";
+
+    return x;
+
+  });
+
+  localStorage.setItem("bookmarks", JSON.stringify(b));
+
+  return b;
+
+}
+
+/* ======================
+   SAVE BOOKMARKS
+====================== */
+
+export function saveBookmarks(b){
+  localStorage.setItem("bookmarks", JSON.stringify(b));
+}
+
+/* ======================
+   TOGGLE BOOKMARK
+====================== */
+
+export function toggleBookmark(q){
+
+  if(!q) return false;
+
+  let b = getBookmarks();
+
+  const pos =
+  b.findIndex(x => x.id === q.id);
+
+  if(pos > -1){
+
+    b.splice(pos,1);
+    saveBookmarks(b);
+
+    return false;
+
+  }else{
+
+    b.push({
+      type:q.type || "MCQ",
+      id:q.id,
+      subject:q.subject || "General",
+      date:Date.now()
+    });
+
+    saveBookmarks(b);
+
+    return true;
+
+  }
+
+}
+
+/* ======================
+   CHECK BOOKMARK
+====================== */
+
+export function isBookmarked(id){
+
+  const bookmarks = getBookmarks();
+
+  return bookmarks.some(b => b.id === id);
+
+}
+
+/* ======================
+   BOOKMARK ICON
+====================== */
+
+export function bookmarkSVG(){
+  return `
+  <svg viewBox="0 0 24 24" fill="currentColor">
+  <path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1z"/>
+  </svg>`;
 }
