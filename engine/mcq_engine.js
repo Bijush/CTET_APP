@@ -10,8 +10,17 @@ isBookmarked,
 bookmarkSVG
 } from "../engine/bookmark_engine.js";
 
+import { showSnack } from "../utils/snackbar.js";
+import {
+trackWeakConcept,
+isWeakConcept,
+showConceptPedagogy
+} from "../engine/concept_engine.js";
+
+import { saveResultAndGo } from "../engine/saveResult.js";
 
 export function startMCQ(config){
+  window.showConceptPedagogy = showConceptPedagogy;
   
   /* ======================
 ⚙️ FEATURE TOGGLES
@@ -430,102 +439,7 @@ window.toggleLangView = () => {
   loadQ();               // full re-render
 };
 
-/* ======================
-   ⭐ BOOKMARK SVG
-====================== */
 
-
-/* ======================
-   📦 BOOKMARK STORAGE
-====================== */
-
-
-/* ======================
-   🔔 SNACKBAR
-====================== */
-function showSnack(msg) {
-
-  const sb = document.getElementById("snackbar");
-  const bookmarkBtn = document.getElementById("bookmarkBtn");
-
-  if (!sb) return;
-
-  /* Reset */
-  sb.classList.remove(
-    "show",
-    "snack-success",
-    "snack-error",
-    "snack-info"
-  );
-
-  sb.innerText = msg;
-
-  const text = msg.toLowerCase();
-
-  if (
-    text.includes("correct") ||
-    text.includes("saved") ||
-    text.includes("bookmarked")
-  ) {
-    sb.classList.add("snack-success");
-  }
-  else if (
-    text.includes("wrong") ||
-    text.includes("removed") ||
-    text.includes("error")
-  ) {
-    sb.classList.add("snack-error");
-  }
-  else {
-    sb.classList.add("snack-info");
-  }
-
-  /* Default center first (for width calc) */
-  sb.style.position = "fixed";
-  sb.style.left = "50%";
-  sb.style.bottom = "110px";
-  sb.style.top = "auto";
-  sb.style.transform = "translateX(-50%)";
-
-  /* 📍 If bookmark exists → reposition */
-  if (bookmarkBtn) {
-
-    const rect = bookmarkBtn.getBoundingClientRect();
-
-    const snackWidth = sb.offsetWidth || 220;
-    const screenWidth = window.innerWidth;
-
-    let left =
-      rect.left +
-      rect.width / 2;
-
-    /* 🧠 Edge protection */
-    const margin = 12;
-
-    if (left - snackWidth / 2 < margin) {
-      left = snackWidth / 2 + margin;
-    }
-
-    if (left + snackWidth / 2 > screenWidth - margin) {
-      left =
-        screenWidth -
-        snackWidth / 2 -
-        margin;
-    }
-
-    sb.style.left = left + "px";
-    sb.style.top =
-      rect.bottom + 10 + "px";
-    sb.style.bottom = "auto";
-  }
-
-  /* Show */
-  sb.classList.add("show");
-
-  setTimeout(() => {
-    sb.classList.remove("show");
-  }, 1600);
-}
 
 /* ======================
    ❓ LOAD QUESTION (FULL REBUILD)
@@ -542,7 +456,16 @@ if (!Array.isArray(filteredQuestions) || filteredQuestions.length === 0) {
 
 console.error("No questions found → ending test");
 
-saveResultAndGo();
+saveResultAndGo({
+  questionOrder,
+  filteredQuestions,
+  attemptMap,
+  selectedSubject,
+  resultKey,
+  getIndexKey,
+  getOrderKey,
+  getAttemptKey
+});
 return;
 
 }
@@ -551,7 +474,16 @@ return;
 
     console.warn("Index exceeded question order → submitting test");
 
-    saveResultAndGo();
+    saveResultAndGo({
+  questionOrder,
+  filteredQuestions,
+  attemptMap,
+  selectedSubject,
+  resultKey,
+  getIndexKey,
+  getOrderKey,
+  getAttemptKey
+});
     return;
   }
   
@@ -560,7 +492,16 @@ return;
 
 if(currentQIndex === undefined){
 console.error("Invalid question index");
-saveResultAndGo();
+saveResultAndGo({
+  questionOrder,
+  filteredQuestions,
+  attemptMap,
+  selectedSubject,
+  resultKey,
+  getIndexKey,
+  getOrderKey,
+  getAttemptKey
+});
 return;
 }
 
@@ -571,7 +512,16 @@ console.error("Question not found → submitting test");
 
 
 
-saveResultAndGo();
+saveResultAndGo({
+  questionOrder,
+  filteredQuestions,
+  attemptMap,
+  selectedSubject,
+  resultKey,
+  getIndexKey,
+  getOrderKey,
+  getAttemptKey
+});
 return;
 }
 /* 🔒 SAFE DATA GUARD */
@@ -1561,7 +1511,16 @@ const currentQIndex = questionOrder[index];
 const q = filteredQuestions[currentQIndex];
 
 if(!q){
-saveResultAndGo();
+saveResultAndGo({
+  questionOrder,
+  filteredQuestions,
+  attemptMap,
+  selectedSubject,
+  resultKey,
+  getIndexKey,
+  getOrderKey,
+  getAttemptKey
+});
 return;
 }
 
@@ -1585,7 +1544,16 @@ JSON.stringify(attemptMap)
 
 /* 🔥 LAST QUESTION FIX */
 if(index >= questionOrder.length - 1){
-saveResultAndGo();
+saveResultAndGo({
+  questionOrder,
+  filteredQuestions,
+  attemptMap,
+  selectedSubject,
+  resultKey,
+  getIndexKey,
+  getOrderKey,
+  getAttemptKey
+});
 return;
 }
 
@@ -1607,147 +1575,7 @@ window.prevQ = () => {
   }
 };
 
-function saveResultAndGo(){
 
-  /* 🔥 USE ORDER LENGTH (FIX FOR ALL SUBJECT MODE) */
-  const total = questionOrder.length;
-
-  let correct = 0;
-  let wrong = 0;
-  let skipped = 0;
-
-  const detailedReview = [];
-
-  for (let i = 0; i < total; i++) {
-
-    const qIndex = questionOrder[i];
-    const q = filteredQuestions[qIndex];
-
-    if(!q) continue;
-
-    const attempt = attemptMap[q.id];
-
-    let status = "skipped";
-
-    /* ==============================
-       ANSWER STATUS CHECK
-    ============================== */
-
-    if (!attempt || attempt.answered !== true) {
-
-      skipped++;
-      status = "skipped";
-
-    }
-    else if (attempt.correct === true) {
-
-      correct++;
-      status = "correct";
-
-    }
-    else {
-
-      wrong++;
-      status = "wrong";
-
-    }
-
-    detailedReview.push({
-      id: q.id,
-      question_en: q.q_en,
-      question_bn: q.q_bn,
-      options_en: q.options_en,
-      options_bn: q.options_bn,
-      correctAnswer: q.ans,
-      selected: attempt?.selected ?? null,
-      status: status,
-      explanation_en: q.ans_reason_en || "",
-      explanation_bn: q.ans_reason_bn || "",
-      concept: q.concept || "",
-      exam: q.exam || "",
-      year: q.year || ""
-    });
-
-  }
-
-  /* ==============================
-     RESULT DATA
-  ============================== */
-
-  const resultData = {
-    subject: selectedSubject,
-    total: total,
-    correct: correct,
-    wrong: wrong,
-    skipped: skipped,
-    percentage:
-      total > 0
-        ? ((correct / total) * 100).toFixed(1)
-        : "0.0",
-    date: new Date().toLocaleString(),
-    review: detailedReview
-  };
-
-  /* ==============================
-     SAVE LAST TEST PAGE
-  ============================== */
-
-  localStorage.setItem(
-    "last_test_page",
-    location.href
-  );
-
-  localStorage.setItem(
-    "last_test_type",
-    resultKey || "MCQ"
-  );
-
-  /* ==============================
-     SAVE LATEST RESULT
-  ============================== */
-
-  localStorage.setItem(
-    resultKey,
-    JSON.stringify(resultData)
-  );
-
-  /* ==============================
-     SAVE RESULT HISTORY
-  ============================== */
-
-  let history =
-    JSON.parse(
-      localStorage.getItem(
-        resultKey.replace("result","history")
-      )
-    ) || [];
-
-  history.unshift(resultData);
-
-  if(history.length > 50){
-    history = history.slice(0,50);
-  }
-
-  localStorage.setItem(
-    resultKey.replace("result","history"),
-    JSON.stringify(history)
-  );
-
-  /* ==============================
-     CLEAR SESSION
-  ============================== */
-
-  localStorage.removeItem(getIndexKey());
-  localStorage.removeItem(getOrderKey());
-  localStorage.removeItem(getAttemptKey());
-
-  /* ==============================
-     GO RESULT PAGE
-  ============================== */
-
-  window.location.href = "../result.html";
-
-}
 
 
 /* ======================
@@ -1761,56 +1589,6 @@ window.goWeakPage = () => {
 
 };
 
-/* ======================
-   🧠 CONCEPT → PEDAGOGY POPUP
-====================== */
-window.showConceptPedagogy = function (concept) {
-
-  const pedagogy = getPedagogyProfile({
-    concept: concept
-  }) || {};
-
-  const box = document.createElement("div");
-  box.className = "concept-popup";
-
-  box.innerHTML = `
-    <div class="concept-card">
-
-      <h3>🧠 Pedagogy Intelligence</h3>
-
-      <div class="ped-grid">
-
-        <div class="ped-card">
-          🧠 Bloom’s Level<br>
-          ${pedagogy.bloom || "—"}
-        </div>
-
-        <div class="ped-card">
-          👶 Piaget Stage<br>
-          ${pedagogy.piaget || "—"}
-        </div>
-
-        <div class="ped-card">
-          👥 Vygotsky Link<br>
-          ${pedagogy.vygotsky || "—"}
-        </div>
-
-        <div class="ped-card">
-          🧱 Constructivism<br>
-          ${pedagogy.constructivism || "—"}
-        </div>
-
-      </div>
-
-      <button onclick="this.closest('.concept-popup').remove()">
-        Close
-      </button>
-
-    </div>
-  `;
-
-  document.body.appendChild(box);
-};
 
 window.goBack = function(){
 
@@ -1825,71 +1603,6 @@ window.goBack = function(){
   }
 
 };
-
-
-
-
-function trackWeakConcept(concept, isWrong){
-
-  // Concept na thakle skip
-  if(!concept) return;
-
-  // Local data load
-  let data =
-    JSON.parse(
-      localStorage.getItem("weakConcepts")
-    ) || {};
-
-  // First time concept
-  if(!data[concept]){
-    data[concept] = {
-      total: 0,
-      wrong: 0
-    };
-  }
-
-  // Attempt count
-  data[concept].total++;
-
-  // Wrong hole increase
-  if(isWrong){
-    data[concept].wrong++;
-  }
-
-  // Save
-  localStorage.setItem(
-    "weakConcepts",
-    JSON.stringify(data)
-  );
-}
-
-/* ======================
-   🧠 CHECK WEAK CONCEPT
-====================== */
-
-function isWeakConcept(concept){
-
-  let data =
-    JSON.parse(
-      localStorage.getItem("weakConcepts")
-    ) || {};
-
-  // Data nai → weak na
-  if(!data[concept]) return false;
-
-  const total =
-    data[concept].total;
-
-  const wrong =
-    data[concept].wrong;
-
-  // Accuracy %
-  const accuracy =
-    ((total - wrong) / total) * 100;
-
-  return accuracy < 60; // Threshold
-}
-
 
 /* CONCEPT CLICK GLOBAL */
 document.addEventListener("click", e => {
