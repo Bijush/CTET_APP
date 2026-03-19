@@ -1,19 +1,29 @@
+
+/* ======================
+LEVEL SYSTEM
+====================== */
+
+let CTET_LEVEL =
+localStorage.getItem("ctetLevel") || "PRIMARY";
+
 /* ======================
 SUBJECT DATA
 ====================== */
 
 const subjectData = {
 
+PRIMARY:{
+
   CDP:[
 
     {
       group:"Development Theories",
       items:[
-        { title:"Jean Piaget Theory", page:"THEORY/theory.html?topic=piaget", progress:0, lock:false },
-        { title:"Lev Vygotsky Theory", page:"CDP/vygotsky.html", progress:0, lock:false },
-        { title:"Kohlberg Moral Development", page:"CDP/kohlbarg.html", progress:0, lock:false },
-        { title:"Erikson Psychosocial Theory", page:"CDP/erikson.html", progress:0, lock:false },
-        { title:"Gesell Maturation Theory", page:"CDP/gesell.html", progress:0, lock:false }
+        { title:"Jean Piaget Theory", page:"THEORY/theory.html?folder=CDP&topic=piaget", progress:0, lock:false },
+        { title:"Lev Vygotsky Theory", page:"THEORY/theory.html?folder=CDP&topic=vygotsky", progress:0, lock:false },
+        { title:"Kohlberg Moral Development", page:"THEORY/theory.html?folder=CDP&topic=Kohlberg", progress:0, lock:false },
+        { title:"Erikson Psychosocial Theory", page:"THEORY/theory.html?folder=CDP&topic=erikson", progress:0, lock:false },
+        { title:"Gesell Maturation Theory", page:"THEORY/theory.html?folder=CDP&topic=gesell", progress:0, lock:false }
       ]
     },
 
@@ -88,65 +98,65 @@ const subjectData = {
   MATH:[
 
   {
-    group:"Nature & Philosophy of Mathematics",
+    group:"Nature & Philosophy",
     items:[
-      { title:"Nature & Aims", page:"MATH/math-nature.html", progress:0, lock:false }
+      { title:"Nature & Aims", page:"THEORY/theory.html?folder=MATH&topic=mathNature", progress:0, lock:false }
     ]
   },
 
   {
-    group:"Learning Theories Applied to Mathematics",
+    group:"Learning Theories",
     items:[
-      { title:"Learning Theories in Math", page:"MATH/math-theories.html", progress:0, lock:false }
+      { title:"Learning Theories in Math", page:"THEORY/theory.html?folder=MATH&topic=mathTheories", progress:0, lock:false }
     ]
   },
 
   {
-    group:"Teaching Methods of Mathematics",
+    group:"Teaching Methods",
     items:[
-      { title:"Teaching Methods", page:"MATH/math-methods.html", progress:0, lock:false }
+      { title:"Teaching Methods", page:"THEORY/theory.html?folder=MATH&topic=mathMethods", progress:0, lock:false }
     ]
   },
 
   {
     group:"Learning Resources & TLM",
     items:[
-      { title:"TLM & ICT", page:"MATH/math-tlm.html", progress:0, lock:false }
+      { title:"TLM & ICT", page:"THEORY/theory.html?folder=MATH&topic=mathTLM", progress:0, lock:false }
     ]
   },
 
   {
-    group:"Assessment & Evaluation in Mathematics",
+    group:"Assessment & Evaluation",
     items:[
-      { title:"Assessment in Math", page:"MATH/math-assessment.html", progress:0, lock:false }
+      { title:"Assessment in Math", page:"THEORY/theory.html?folder=MATH&topic=mathAssessment", progress:0, lock:false }
     ]
   },
 
   {
     group:"Error Analysis & Misconceptions",
     items:[
-      { title:"Error Analysis", page:"MATH/math-errors.html", progress:0, lock:false }
+      { title:"Error Analysis", page:"THEORY/theory.html?folder=MATH&topic=mathErrors", progress:0, lock:false }
     ]
   },
 
   {
     group:"Inclusive Mathematics Education",
     items:[
-      { title:"Inclusive Math Classroom", page:"MATH/math-inclusive.html", progress:0, lock:false }
+      { title:"Inclusive Math Classroom", page:"THEORY/theory.html?folder=MATH&topic=mathInclusion", progress:0, lock:false }
     ]
   },
 
   {
     group:"Curriculum & Policies",
     items:[
-      { title:"Curriculum & Policy", page:"MATH/math-policy.html", progress:0, lock:false }
+      { title:"Curriculum & Policy", page:"THEORY/theory.html?folder=MATH&topic=mathPolicy", progress:0, lock:false }
     ]
   },
 
   {
-    group:"Mathematics Content Pedagogy (Class 1–5 Focus)",
+    group:"Content Pedagogy (Class 1–5)",
     items:[
-      { title:"Content Pedagogy", page:"MATH/math-content.html", progress:0, lock:false }
+      { title:"Content Pedagogy", page:"THEORY/theory.html?folder=MATH&topic=mathContent", progress:0, lock:false }
     ]
   }
 
@@ -156,27 +166,27 @@ EVS:[
 {
   group:"NCERT EVS (Class 3–5)",
   items:[
-    { title:"📘 NCERT EVS (Class 3–5)", page:"EVS/evs-ncert.html", progress:0, lock:false },
-    { title:"🌍 Environmental Themes", page:"EVS/evs-environment.html", progress:0, lock:false },
-    { title:"👩‍🎓 Gender & Inclusion Stories", page:"EVS/evs-gender.html", progress:0, lock:false },
-    { title:"🚆 Migration & Livelihood", page:"EVS/evs-migration.html", progress:0, lock:false },
-    { title:"🏔 Adaptation & Climate", page:"EVS/evs-adaptation.html", progress:0, lock:false },
-    { title:"♻ Resources & Conservation", page:"EVS/evs-resources.html", progress:0, lock:false }
+    { title:"📘 NCERT EVS (Class 3–5)", page:"THEORY/theory.html?folder=EVS&topic=evsChapters", progress:0, lock:false },
+    { title:"🌍 Environmental Themes", page:"THEORY/theory.html?folder=EVS&topic=evsEnvironment", progress:0, lock:false },
+    { title:"👩‍🎓 Gender & Inclusion Stories", page:"THEORY/theory.html?folder=EVS&topic=evsStories", progress:0, lock:false },
+    { title:"🚆 Migration & Livelihood", page:"THEORY/theory.html?folder=EVS&topic=evsAdaption", progress:0, lock:false },
+    { title:"🏔 Adaptation & Climate", page:"THEORY/theory.html?folder=EVS&topic=evsMigration", progress:0, lock:false },
+    { title:"♻ Resources & Conservation", page:"THEORY/theory.html?folder=EVS&topic=evsResources", progress:0, lock:false }
   ]
 },
 
   {
     group:"EVS Pedagogy",
     items:[
-      { title:"Nature & Scope of EVS", page:"EVS/PEDAGOGY/evs-nature.html", progress:0, lock:false },
-      { title:"Aims & Objectives", page:"EVS/PEDAGOGY/evs-aims.html", progress:0, lock:false },
-      { title:"Integrated Approach", page:"EVS/PEDAGOGY/evs-integrated.html", progress:0, lock:false },
-      { title:"Constructivism in EVS", page:"EVS/PEDAGOGY/evs-constructivism.html", progress:0, lock:false },
-      { title:"Teaching Methods", page:"EVS/PEDAGOGY/evs-methods.html", progress:0, lock:false },
-      { title:"Assessment in EVS", page:"EVS/PEDAGOGY/evs-assessment.html", progress:0, lock:false },
-      { title:"TLM & Activity Based Learning", page:"EVS/PEDAGOGY/evs-tlm.html", progress:0, lock:false },
-      { title:"Learning Difficulties in EVS", page:"EVS/PEDAGOGY/evs-difficulties.html", progress:0, lock:false },
-      { title:"Environmental Sensitivity", page:"EVS/PEDAGOGY/evs-sensitivity.html", progress:0, lock:false }
+      { title:"Nature & Scope of EVS", page:"THEORY/theory.html?folder=EVS&topic=evsNature", progress:0, lock:false },
+      { title:"Aims & Objectives", page:"THEORY/theory.html?folder=EVS&topic=evsAims", progress:0, lock:false },
+      { title:"Integrated Approach", page:"THEORY/theory.html?folder=EVS&topic=evsIntegrated", progress:0, lock:false },
+      { title:"Constructivism in EVS", page:"THEORY/theory.html?folder=EVS&topic=evsConstructivism", progress:0, lock:false },
+      { title:"Teaching Methods", page:"THEORY/theory.html?folder=EVS&topic=evsAdaption", progress:0, lock:false },
+      { title:"Assessment in EVS", page:"THEORY/theory.html?folder=EVS&topic=evsAssessment", progress:0, lock:false },
+      { title:"TLM & Activity Based Learning", page:"THEORY/theory.html?folder=EVS&topic=evsTLM", progress:0, lock:false },
+      { title:"Learning Difficulties in EVS", page:"THEORY/theory.html?folder=EVS&topic=evsDifficulties", progress:0, lock:false },
+      { title:"Environmental Sensitivity", page:"THEORY/theory.html?folder=EVS&topic=evsSensitivity", progress:0, lock:false }
     ]
   }
 
@@ -184,61 +194,99 @@ EVS:[
 BENGALI:[
 
 {
-  group:"Language Pedagogy",
+  group:"Language Pedagogy (ভাষা শিক্ষণ)",
   items:[
-    { title:"Nature of Language", page:"BENGALI/bengali-nature.html", progress:0, lock:false },
-    { title:"Language Acquisition vs Learning", page:"BENGALI/bengali-acquisition.html", progress:0, lock:false },
-    { title:"Principles of Language Teaching", page:"BENGALI/bengali-principles.html", progress:0, lock:false },
-    { title:"Constructivism in Language", page:"BENGALI/bengali-constructivism.html", progress:0, lock:false },
-    { title:"Role of Teacher in Language Classroom", page:"BENGALI/bengali-teacher-role.html", progress:0, lock:false }
+    { title:"Nature of Language", page:"THEORY/theory.html?folder=Bengali&topic=bengaliNature", progress:0, lock:false },
+    { title:"Objectives of Language Teaching", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageObjectives", progress:0, lock:false },
+    { title:"Language Acquisition vs Language Learning", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageAcquisition", progress:0, lock:false },
+    { title:"Principles of Language Teaching", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguagePrinciples", progress:0, lock:false },
+    { title:"Constructivism in Language Teaching", page:"THEORY/theory.html?folder=Bengali&topic=bengaliConstructivism", progress:0, lock:false },
+    { title:"Role of Teacher in Language Classroom", page:"THEORY/theory.html?folder=Bengali&topic=bengaliTeacherRole", progress:0, lock:false }
   ]
 },
 
 {
   group:"Language Skills (LSRW)",
   items:[
-    { title:"Listening Skill", page:"BENGALI/bengali-listening.html", progress:0, lock:false },
-    { title:"Speaking Skill", page:"BENGALI/bengali-speaking.html", progress:0, lock:false },
-    { title:"Reading Skill", page:"BENGALI/bengali-reading.html", progress:0, lock:false },
-    { title:"Writing Skill", page:"BENGALI/bengali-writing.html", progress:0, lock:false }
+    { title:"Listening Skill", page:"THEORY/theory.html?folder=Bengali&topic=bengaliListeningSkill", progress:0, lock:false },
+    { title:"Speaking Skill", page:"THEORY/theory.html?folder=Bengali&topic=bengaliSpeakingSkill", progress:0, lock:false },
+    { title:"Reading Skill", page:"THEORY/theory.html?folder=Bengali&topic=bengaliReadingSkill", progress:0, lock:false },
+    { title:"Writing Skill", page:"THEORY/theory.html?folder=Bengali&topic=bengaliWritingSkill", progress:0, lock:false }
   ]
 },
 
 {
-  group:"Teaching Methods",
+  group:"Teaching Approaches & Methods",
   items:[
-    { title:"Grammar Translation Method", page:"BENGALI/bengali-gtm.html", progress:0, lock:false },
-    { title:"Direct Method", page:"BENGALI/bengali-direct.html", progress:0, lock:false },
-    { title:"Communicative Approach", page:"BENGALI/bengali-communicative.html", progress:0, lock:false },
-    { title:"Activity Based Learning", page:"BENGALI/bengali-abl.html", progress:0, lock:false }
+    { title:"Grammar Translation Method", page:"THEORY/theory.html?folder=Bengali&topic=bengaliGTM", progress:0, lock:false },
+    { title:"Direct Method", page:"THEORY/theory.html?folder=Bengali&topic=bengaliDirectMethod", progress:0, lock:false },
+    { title:"Communicative Approach", page:"THEORY/theory.html?folder=Bengali&topic=bengaliCommunicativeApproach", progress:0, lock:false },
+    { title:"Activity Based Learning", page:"THEORY/theory.html?folder=Bengali&topic=bengaliABL", progress:0, lock:false }
+
+    
   ]
 },
 
 {
-  group:"Assessment in Language",
+  group:"Language in Classroom Context",
   items:[
-    { title:"Formative Assessment", page:"BENGALI/bengali-formative.html", progress:0, lock:false },
-    { title:"Summative Assessment", page:"BENGALI/bengali-summative.html", progress:0, lock:false },
-    { title:"Diagnostic Test", page:"BENGALI/bengali-diagnostic.html", progress:0, lock:false },
-    { title:"CCE in Language", page:"BENGALI/bengali-cce.html", progress:0, lock:false }
+    { title:"Multilingualism", page:"THEORY/theory.html?folder=Bengali&topic=bengaliMultilingualism", progress:0, lock:false },
+    { title:"Language Across Curriculum", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageAcrossCurriculum", progress:0, lock:false },
+    { title:"Language Errors", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageErrors", progress:0, lock:false },
+    { title:"Language & Thinking", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageThinking", progress:0, lock:false },
+    { title:"Error Analysis & Correction", page:"THEORY/theory.html?folder=Bengali&topic=bengaliErrorCorrection", progress:0, lock:false }
   ]
 },
 
 {
-  group:"Grammar & Vocabulary",
+  group:"Teaching Support",
   items:[
-    { title:"Synonym (সমার্থক শব্দ)", page:"BENGALI/bengali-synonym.html", progress:0, lock:false },
-    { title:"Antonym (বিপরীত শব্দ)", page:"BENGALI/bengali-antonym.html", progress:0, lock:false },
-    { title:"Idioms (বাগধারা)", page:"BENGALI/bengali-idioms.html", progress:0, lock:false },
-    { title:"Sentence Correction", page:"BENGALI/bengali-sentence.html", progress:0, lock:false }
+    { title:"Teaching Learning Material (TLM)", page:"THEORY/theory.html?folder=Bengali&topic=bengaliTLM", progress:0, lock:false },
+    { title:"Remedial Teaching", page:"THEORY/theory.html?folder=Bengali&topic=bengaliRemedialTeaching", progress:0, lock:false },
+    { title:"Language Games", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageGames", progress:0, lock:false },
+    { title:"Characteristics of Good Language Textbook", page:"THEORY/theory.html?folder=Bengali&topic=bengaliTextbook", progress:0, lock:false }
+  ]
+},
+
+{
+  group:"Teaching of Language Components",
+  items:[
+    { title:"Teaching of Listening", page:"THEORY/theory.html?folder=Bengali&topic=bengaliTeachingListening", progress:0, lock:false },
+    { title:"Teaching of Speaking", page:"THEORY/theory.html?folder=Bengali&topic=bengaliTeachingSpeaking", progress:0, lock:false },
+    { title:"Teaching of Grammar", page:"THEORY/theory.html?folder=Bengali&topic=bengaliGrammarTeaching", progress:0, lock:false },
+    { title:"Teaching of Vocabulary", page:"THEORY/theory.html?folder=Bengali&topic=bengaliVocabularyTeaching", progress:0, lock:false },
+    { title:"Teaching of Reading", page:"THEORY/theory.html?folder=Bengali&topic=bengaliTeachingReading", progress:0, lock:false },
+    { title:"Teaching of Writing", page:"THEORY/theory.html?folder=Bengali&topic=bengaliTeachingWriting", progress:0, lock:false }
+  ]
+},
+
+{
+  group:"Assessment & Evaluation",
+  items:[
+    { title:"Formative Assessment", page:"THEORY/theory.html?folder=Bengali&topic=bengaliFormativeAssessment", progress:0, lock:false },
+    { title:"Summative Assessment", page:"THEORY/theory.html?folder=Bengali&topic=bengaliSummativeAssessment", progress:0, lock:false },
+    { title:"Diagnostic Test", page:"THEORY/theory.html?folder=Bengali&topic=bengaliDiagnosticTest", progress:0, lock:false },
+    { title:"CCE in Language", page:"THEORY/theory.html?folder=Bengali&topic=bengaliContinuousEvaluation", progress:0, lock:false },
+    { title:"Evaluation of Language Skills", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageEvaluation", progress:0, lock:false },
+        { title:"Assessment", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageAssessment", progress:0, lock:false }
+  ]
+},
+
+{
+  group:"Vocabulary & Grammar",
+  items:[
+    { title:"Synonym (সমার্থক শব্দ)", page:"THEORY/theory.html?folder=Bengali&topic=bengaliSynonym", progress:0, lock:false },
+    { title:"Antonym (বিপরীত শব্দ)", page:"THEORY/theory.html?folder=Bengali&topic=bengaliAntonym", progress:0, lock:false },
+    { title:"Idioms (বাগধারা)", page:"THEORY/theory.html?folder=Bengali&topic=bengaliIdioms", progress:0, lock:false },
+    { title:"Sentence Correction", page:"THEORY/theory.html?folder=Bengali&topic=bengaliSentenceCorrection", progress:0, lock:false }
   ]
 },
 
 {
   group:"Reading Comprehension",
   items:[
-    { title:"Prose Comprehension", page:"BENGALI/bengali-prose.html", progress:0, lock:false },
-    { title:"Poetry Comprehension", page:"BENGALI/bengali-poetry.html", progress:0, lock:false }
+    { title:"Prose Comprehension", page:"THEORY/theory.html?folder=Bengali&topic=bengaliProseComprehension", progress:0, lock:false },
+    { title:"Poetry Comprehension", page:"THEORY/theory.html?folder=Bengali&topic=bengaliPoetryComprehension", progress:0, lock:false }
   ]
 }
 
@@ -306,8 +354,184 @@ ENGLISH:[
   ]
 }
 
+]
+
+},
+
+UPPER:{
+
+CDP:[
+
+{
+group:"Child Development",
+items:[
+{ title:"Concept of Development", page:"cdpDevelopment.html", progress:0, lock:false },
+{ title:"Growth vs Development", page:"growth-development.html", progress:0, lock:false },
+{ title:"Principles of Development", page:"principles.html", progress:0, lock:false },
+{ title:"Heredity & Environment", page:"heredity.html", progress:0, lock:false },
+{ title:"Individual Differences", page:"individual-difference.html", progress:0, lock:false }
+]
+},
+
+{
+group:"Development Theories",
+items:[
+{ title:"Jean Piaget Theory", page:"THEORY/theory.html?folder=CDP&topic=piaget", progress:0, lock:false },
+{ title:"Lev Vygotsky Theory", page:"THEORY/theory.html?folder=CDP&topic=vygotsky", progress:0, lock:false },
+{ title:"Kohlberg Moral Development", page:"THEORY/theory.html?folder=CDP&topic=Kohlberg", progress:0, lock:false },
+{ title:"Erikson Psychosocial Theory", page:"THEORY/theory.html?folder=CDP&topic=erikson", progress:0, lock:false }
+]
+},
+
+{
+group:"Learning Theories",
+items:[
+{ title:"Pavlov Classical Conditioning", page:"pavlov.html", progress:0, lock:false },
+{ title:"Thorndike Trial & Error", page:"thorndike.html", progress:0, lock:false },
+{ title:"Skinner Operant Conditioning", page:"skinner.html", progress:0, lock:false },
+{ title:"Bandura Social Learning", page:"bandura.html", progress:0, lock:false }
+]
+},
+
+{
+group:"Inclusive Education",
+items:[
+{ title:"CWSN Concept", page:"cwsn.html", progress:0, lock:false },
+{ title:"ADHD", page:"adhd.html", progress:0, lock:false },
+{ title:"Dyslexia", page:"dyslexia.html", progress:0, lock:false },
+{ title:"Autism", page:"autism.html", progress:0, lock:false },
+{ title:"Gifted Child", page:"gifted.html", progress:0, lock:false }
+]
+}
+
 ],
 
+MATH:[
+
+{
+group:"Nature of Mathematics",
+items:[
+{ title:"Nature & Aims of Mathematics", page:"THEORY/theory.html?folder=MATH&topic=mathNature", progress:0, lock:false },
+{ title:"Mathematics Curriculum", page:"mathCurriculum.html", progress:0, lock:false }
+]
+},
+
+{
+group:"Mathematics Teaching",
+items:[
+{ title:"Teaching Methods", page:"THEORY/theory.html?folder=MATH&topic=mathMethods", progress:0, lock:false },
+{ title:"Error Analysis", page:"THEORY/theory.html?folder=MATH&topic=mathErrors", progress:0, lock:false },
+{ title:"Assessment in Mathematics", page:"THEORY/theory.html?folder=MATH&topic=mathAssessment", progress:0, lock:false }
+]
+}
+
+],
+
+SCIENCE:[
+
+{
+group:"Nature of Science",
+items:[
+{ title:"Nature & Structure of Science", page:"scienceNature.html", progress:0, lock:false },
+{ title:"Science Curriculum", page:"scienceCurriculum.html", progress:0, lock:false }
+]
+},
+
+{
+group:"Science Teaching",
+items:[
+{ title:"Teaching Methods", page:"scienceMethods.html", progress:0, lock:false },
+{ title:"Science Experiments", page:"scienceExperiments.html", progress:0, lock:false },
+{ title:"Science Laboratory", page:"scienceLab.html", progress:0, lock:false }
+]
+},
+
+{
+group:"Science Assessment",
+items:[
+{ title:"Evaluation in Science", page:"scienceEvaluation.html", progress:0, lock:false }
+]
+}
+
+],
+
+SOCIAL:[
+
+{
+group:"History Pedagogy",
+items:[
+{ title:"Nature of History", page:"historyNature.html", progress:0, lock:false },
+{ title:"Sources of History", page:"historySources.html", progress:0, lock:false }
+]
+},
+
+{
+group:"Geography Pedagogy",
+items:[
+{ title:"Nature of Geography", page:"geographyNature.html", progress:0, lock:false },
+{ title:"Maps & Globe", page:"mapsGlobe.html", progress:0, lock:false }
+]
+},
+
+{
+group:"Social Science Teaching",
+items:[
+{ title:"Teaching Methods", page:"socialMethods.html", progress:0, lock:false },
+{ title:"Charts & Models", page:"chartsModels.html", progress:0, lock:false },
+{ title:"Assessment in Social Science", page:"socialAssessment.html", progress:0, lock:false }
+]
+}
+
+],
+
+ENGLISH:[
+
+{
+group:"Language Pedagogy",
+items:[
+{ title:"Nature of Language", page:"ENGLISH/english-nature.html", progress:0, lock:false },
+{ title:"Language Acquisition vs Learning", page:"ENGLISH/english-acquisition.html", progress:0, lock:false },
+{ title:"Principles of Language Teaching", page:"ENGLISH/english-principles.html", progress:0, lock:false },
+{ title:"Constructivism in Language Teaching", page:"ENGLISH/english-constructivism.html", progress:0, lock:false }
+]
+},
+
+{
+group:"Language Skills",
+items:[
+{ title:"Listening Skill", page:"ENGLISH/english-listening.html", progress:0, lock:false },
+{ title:"Speaking Skill", page:"ENGLISH/english-speaking.html", progress:0, lock:false },
+{ title:"Reading Skill", page:"ENGLISH/english-reading.html", progress:0, lock:false },
+{ title:"Writing Skill", page:"ENGLISH/english-writing.html", progress:0, lock:false }
+]
+}
+
+],
+
+BENGALI:[
+
+{
+group:"Language Pedagogy",
+items:[
+{ title:"Nature of Language", page:"THEORY/theory.html?folder=Bengali&topic=bengaliNature", progress:0, lock:false },
+{ title:"Language Acquisition", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguageAcquisition", progress:0, lock:false },
+{ title:"Principles of Language Teaching", page:"THEORY/theory.html?folder=Bengali&topic=bengaliLanguagePrinciples", progress:0, lock:false }
+]
+},
+
+{
+group:"Language Skills",
+items:[
+{ title:"Listening Skill", page:"THEORY/theory.html?folder=Bengali&topic=bengaliListeningSkill", progress:0, lock:false },
+{ title:"Speaking Skill", page:"THEORY/theory.html?folder=Bengali&topic=bengaliSpeakingSkill", progress:0, lock:false },
+{ title:"Reading Skill", page:"THEORY/theory.html?folder=Bengali&topic=bengaliReadingSkill", progress:0, lock:false },
+{ title:"Writing Skill", page:"THEORY/theory.html?folder=Bengali&topic=bengaliWritingSkill", progress:0, lock:false }
+]
+}
+
+]
+
+}
 };
 
 
@@ -319,13 +543,15 @@ function getColor(sub){
 
   const map = {
 
-    CDP:"#42a5f5",
-    MATH:"#66bb6a",
-    EVS:"#26c6da",
-    ENGLISH:"#ab47bc",
-    BENGALI:"#ef5350"
+  CDP:"#42a5f5",
+  MATH:"#66bb6a",
+  EVS:"#26c6da",
+  SCIENCE:"#26c6da",
+  SOCIAL:"#ff7043",
+  ENGLISH:"#ab47bc",
+  BENGALI:"#ef5350"
 
-  };
+};
 
   return map[sub] || "#1e88e5";
 }
@@ -350,25 +576,66 @@ function(ev,sub){
   renderConcepts(sub);
 };
 
+/* ======================
+CHANGE LEVEL
+====================== */
+
+window.changeLevel =
+function(level){
+
+localStorage.setItem("ctetLevel",level);
+
+/* reset subject */
+localStorage.setItem("activeSubject","CDP");
+
+location.reload();
+
+};
+
+
 
 /* ======================
 RENDER
 ====================== */
 
 function renderConcepts(sub){
+  sub = sub.trim();
 
   const list = document.getElementById("conceptList");
   const title = document.getElementById("subjectTitle");
+  const icons = {
+    CDP:"🧠",
+    MATH:"📐",
+    EVS:"🌍",
+    SCIENCE:"🧪",
+    SOCIAL:"🌎",
+    ENGLISH:"🔤",
+    BENGALI:"📝"
+  };
 
   // 🔥 Save current subject
   localStorage.setItem("activeSubject", sub);
 
-  title.innerText = `📘 ${sub} Concepts`;
+  title.innerText = `${icons[sub] || "📘"} ${sub} Concepts`;
   list.innerHTML = "";
   // 🔥 Apply Subject Theme
 document.body.setAttribute("data-subject", sub);
 
-  const data = subjectData[sub] || [];
+  const data =
+(subjectData[CTET_LEVEL] &&
+subjectData[CTET_LEVEL][sub]) || [];
+
+if(!data.length){
+
+list.innerHTML = `
+<div class="empty-state">
+📭 No concepts available
+</div>
+`;
+
+return;
+}
+
 
   // 🔥 Load tab-wise progress
   const tabData =
@@ -379,15 +646,18 @@ document.body.setAttribute("data-subject", sub);
     localStorage.getItem("openGroup_" + sub);
 
   data.forEach((group,index)=>{
+    const count = group.items.length;
 
     // 🔹 GROUP CARD
     const groupDiv = document.createElement("div");
     groupDiv.className = "group-card";
 
     groupDiv.innerHTML = `
-      <span>📂 ${group.group}</span>
-      <span class="group-arrow" id="arrow-${index}">▼</span>
-    `;
+  <span>📂 ${group.group}
+    <span class="badge">${count}</span>
+  </span>
+  <span class="group-arrow" id="arrow-${index}">▼</span>
+`;
 
     // 🔹 CHILD CONTAINER
     const childContainer = document.createElement("div");
@@ -400,7 +670,7 @@ document.body.setAttribute("data-subject", sub);
       // 🔥 Calculate final progress
       let finalProgress = c.progress;
 
-      const key = c.page.split("/").pop();
+      const key = c.page;
 
 if(tabData && tabData[key]){
 
@@ -574,22 +844,113 @@ function rippleEffect(e,el){
 
 
 /* ======================
+UPDATE TABS BY LEVEL
+====================== */
+
+function updateTabs(){
+
+const tabs = document.querySelector(".tabs");
+
+if(!tabs) return;
+
+if(CTET_LEVEL === "UPPER"){
+
+tabs.innerHTML = `
+
+<button class="tab active"
+onclick="changeSubject(event,'CDP')">
+CDP
+</button>
+
+<button class="tab"
+onclick="changeSubject(event,'MATH')">
+MATH
+</button>
+
+<button class="tab"
+onclick="changeSubject(event,'SCIENCE')">
+SCIENCE
+</button>
+
+<button class="tab"
+onclick="changeSubject(event,'SOCIAL')">
+SOCIAL
+</button>
+
+<button class="tab"
+onclick="changeSubject(event,'ENGLISH')">
+ENGLISH
+</button>
+
+<button class="tab"
+onclick="changeSubject(event,'BENGALI')">
+BENGALI
+</button>
+
+`;
+
+}
+
+}
+
+/* ======================
+LEVEL ACTIVE UI
+====================== */
+
+function updateLevelUI(){
+
+const p = document.getElementById("level-primary");
+const u = document.getElementById("level-upper");
+
+if(!p || !u) return;
+
+p.classList.remove("active");
+u.classList.remove("active");
+
+if(CTET_LEVEL === "PRIMARY"){
+  p.classList.add("active");
+}
+
+if(CTET_LEVEL === "UPPER"){
+  u.classList.add("active");
+}
+
+}
+
+/* ======================
 DEFAULT LOAD
 ====================== */
 
-const saved =
-  localStorage.getItem("activeSubject") || "CDP";
+updateTabs();
+updateLevelUI();
+
+let saved =
+localStorage.getItem("activeSubject") || "CDP";
+
+/* 🔥 Fix subject mismatch between PRIMARY / UPPER */
+
+if(!subjectData[CTET_LEVEL] ||
+   !subjectData[CTET_LEVEL][saved]){
+
+  saved = Object.keys(subjectData[CTET_LEVEL])[0];
+}
 
 renderConcepts(saved);
 
 /* 🔥 Active tab auto set */
 document.querySelectorAll(".tab")
 .forEach(tab=>{
-  if(tab.textContent.trim() === saved){
-    tab.classList.add("active");
-  } else {
-    tab.classList.remove("active");
-  }
+
+const sub =
+tab.getAttribute("onclick")
+.match(/'([^']+)'/)[1];
+
+if(sub === saved){
+tab.classList.add("active");
+}else{
+tab.classList.remove("active");
+}
+
 });
 
 
@@ -597,18 +958,28 @@ document.querySelectorAll(".tab")
 
 window.addEventListener("pageshow", ()=>{
 
-  const saved =
+  let saved =
     localStorage.getItem("activeSubject") || "CDP";
+
+  if(!subjectData[CTET_LEVEL][saved]){
+    saved = "CDP";
+  }
 
   renderConcepts(saved);
 
   document.querySelectorAll(".tab")
-  .forEach(tab=>{
-    if(tab.textContent.trim() === saved){
-      tab.classList.add("active");
-    } else {
-      tab.classList.remove("active");
-    }
-  });
+.forEach(tab=>{
+
+const sub =
+tab.getAttribute("onclick")
+.match(/'([^']+)'/)[1];
+
+if(sub === saved){
+tab.classList.add("active");
+}else{
+tab.classList.remove("active");
+}
+
+});
 
 });

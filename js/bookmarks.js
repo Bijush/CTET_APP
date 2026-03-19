@@ -12,6 +12,8 @@ import "../data/scert/teaching-aptitude.js";
 import "../data/vygotskyMcq.js";
 import "../data/kohlbarg-mcq.js";
 import "../data/eriksonDataMcq.js";
+import "../data/bengaliPedagogy.js";
+
 
 
 const list = document.getElementById("list");
