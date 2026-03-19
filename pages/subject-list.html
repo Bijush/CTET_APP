@@ -21,9 +21,14 @@ GLASS HEADER
 PREMIUM HEADER
 ====================== -->
 
-<div class="header-left"
-     onclick="goBack()">
-  ⬅
+<div class="header">
+
+<div class="header-left" onclick="goBack()">⬅</div>
+
+<div class="header-title">
+Choose Your Subject
+</div>
+
 </div>
 
 <script>
@@ -36,15 +41,27 @@ function goBack(){
 }
 </script>
 
-  <div class="header-title">
-    📘 Concept Subjects
-  </div>
-
-</div>
-
 <!-- ======================
 TABS
 ====================== -->
+
+<!-- ======================
+LEVEL SWITCH
+====================== -->
+
+<div class="level-tabs">
+
+<button id="level-primary"
+onclick="changeLevel('PRIMARY')">
+Primary
+</button>
+
+<button id="level-upper"
+onclick="changeLevel('UPPER')">
+Upper Primary
+</button>
+
+</div>
 
 <div class="tabs">
 
