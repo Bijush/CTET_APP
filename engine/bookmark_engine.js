@@ -8,6 +8,7 @@ const registry = {
   CONCEPT: [],
   THEORY: [],
   GK: []
+  
 };
 
 /* ======================
