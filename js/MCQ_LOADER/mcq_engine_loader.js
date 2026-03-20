@@ -7,20 +7,7 @@ import { mockQuestion } from "../../data/mock_question.js";
 import { eriksonMcq } from "../../data/eriksonDataMcq.js";
 import { kohlbargMcq } from "../../data/kohlbarg-mcq.js";
 import { TAptitude } from "../../data/scert/teaching-aptitude.js";
-//import { GK } from "../../data/scert/gk.js";
-//import { reasoning } from "../../data/scert/reasoning.js";
-//import { currentAffairs } from "../../data/scert/current-affairs.js";
-/*
-const SCERT_COMBINED = [
-
-...TAptitude,
-...GK,
-...reasoning,
-...currentAffairs
-
-];
-*/
-
+import { benglaPedagogy } from "../../data/bengaliPedagogy.js";
 
 /* ======================
    📦 TEST DATA MAP
@@ -36,8 +23,9 @@ const TEST_DATA = {
 
   mock: mockQuestion,
   erikson: eriksonMcq,
-  kohlbarg: kohlbargMcq,
-  scert: TAptitude
+  kohlberg: kohlbargMcq,
+  scert: TAptitude,
+  bangla: benglaPedagogy
 
 };
 
