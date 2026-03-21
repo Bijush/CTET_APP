@@ -602,3 +602,13 @@ AI OPTION STYLE
       transparent
     );
 }
+.q-en{
+font-size:18px;
+font-weight:600;
+}
+
+.q-bn{
+font-size:14px;
+color:#555;
+margin-top:6px;
+}
