@@ -5,6 +5,6 @@ const PAPERS = [
     year: 2024,
     subject: "General",
     language: "English",
-    file: "../../../pdfs/ADRE_2024.pdf"
+    file: "../../pdfs/ADRE_2024.pdf"
   }
 ];
