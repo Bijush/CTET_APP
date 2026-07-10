@@ -1,0 +1,150 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#f5f7fb;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#222;
+}
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+#search,
+#yearFilter{
+    height:50px;
+    border-radius:12px;
+    border:1px solid #dcdcdc;
+}
+
+#search:focus,
+#yearFilter:focus{
+    box-shadow:0 0 0 .2rem rgba(13,110,253,.15);
+}
+
+.paper-card{
+    transition:.25s;
+}
+
+.paper-card:hover{
+    transform:translateY(-5px);
+}
+
+.card{
+    border:none;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    height:100%;
+}
+
+.card-body{
+    display:flex;
+    flex-direction:column;
+}
+
+.paper-title{
+    font-size:1.05rem;
+    font-weight:700;
+    margin-bottom:12px;
+    line-height:1.5;
+}
+
+.paper-info{
+    font-size:.92rem;
+    color:#666;
+    margin-bottom:6px;
+}
+
+.badge-year{
+    display:inline-block;
+    background:#0d6efd;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:30px;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.button-group{
+    display:flex;
+    gap:10px;
+    margin-top:auto;
+}
+
+.button-group a{
+    flex:1;
+    text-align:center;
+    text-decoration:none;
+    border-radius:10px;
+    padding:10px 12px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.view-btn{
+    background:#0d6efd;
+    color:#fff;
+}
+
+.view-btn:hover{
+    background:#0b5ed7;
+    color:#fff;
+}
+
+.download-btn{
+    background:#198754;
+    color:#fff;
+}
+
+.download-btn:hover{
+    background:#157347;
+    color:#fff;
+}
+
+#noData{
+    padding:80px 0;
+    font-size:20px;
+}
+
+footer{
+    margin-top:50px;
+    font-size:14px;
+    color:#777;
+}
+
+@media(max-width:768px){
+
+    .button-group{
+        flex-direction:column;
+    }
+
+    .paper-title{
+        font-size:1rem;
+    }
+
+}
+
+@media(max-width:576px){
+
+    .container{
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+    #search,
+    #yearFilter{
+        height:46px;
+    }
+
+    .card{
+        border-radius:14px;
+    }
+
+}

@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f1f5f9; /* হালকা রিফ্রেশিং ব্যাকগ্রাউন্ড */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* মডার্ন ফন্ট */
+    color: #1e293b;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    width: min(700px, 95%); /* রিডিং কমফোর্টের জন্য উইডথ কিছুটা কমানো হয়েছে */
+    margin: 40px auto;
+}
+
+/* Header Styling */
+.header {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8); /* আকর্ষণীয় গ্রাডিয়েন্ট */
+    color: white;
+    padding: 24px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+}
+
+.header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Card Styling */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.card h2 {
+    color: #1e293b;
+    margin-bottom: 18px;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Question Content Styling */
+#questionText {
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+#questionText h3 {
+    font-size: 15px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+#questionText p {
+    background: #f8fafc;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    border-left: 3px solid #cbd5e1;
+}
+
+/* Options Container */
+#options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Modern Radio Buttons */
+#options label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+#options label:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* অপশন সিলেক্ট হলে স্টাইল পরিবর্তন (CSS :has selector) */
+#options label:has(input:checked) {
+    background: #eff6ff;
+    border-color: #2563eb;
+    color: #1e40af;
+}
+
+#options input {
+    accent-color: #2563eb; /* রেডিও বাটনের কালার চেঞ্জ */
+    transform: scale(1.2);
+}
+
+/* Buttons Styling */
+button {
+    width: 100%;
+    margin-top: 20px;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+button:active {
+    transform: scale(0.98); /* ক্লিক করলে হালকা দেবে যাবে */
+}
+
+#submitBtn {
+    background: #2563eb;
+    color: white;
+}
+
+#submitBtn:hover {
+    background: #1d4ed8;
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+}
+
+#submitBtn:disabled {
+    background: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Navigation Layout */
+.navigation {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+#prevBtn {
+    background: white;
+    color: #475569;
+    border: 2px solid #e2e8f0;
+}
+
+#nextBtn {
+    background: #10b981;
+    color: white;
+}
+
+#prevBtn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+#nextBtn:hover {
+    background: #059669;
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+}
+
+/* Helper Classes */
+.hidden {
+    display: none !important;
+}
+
+#resultCard {
+    text-align: center;
+}
+
+#resultText {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.correct {
+    color: #10b981;
+}
+
+.wrong {
+    color: #ef4444;
+}
+
+#explanation {
+    line-height: 1.8;
+    font-size: 16px;
+    color: #475569;
+}
+
+#diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+#diagram svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+    }
+    .header {
+        padding: 20px;
+    }
+    .header h1 {
+        font-size: 22px;
+    }
+    .card {
+        padding: 20px;
+    }
+    button {
+        padding: 14px;
+        font-size: 15px;
+    }
+    .navigation {
+        flex-direction: row; /* মোবাইলেও পাশাপাশি থাকবে, দেখতে সুন্দর লাগে */
+    }
+}
